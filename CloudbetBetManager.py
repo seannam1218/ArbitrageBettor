@@ -41,29 +41,6 @@ class CloudbetBetManager:
             'X-API-Key': self.api_key
         }
 
-        # get_currencies_task = asyncio.create_task(self.send_request("GET", url, headers))
-        # response = await get_currencies_task
-        #
-        # currencies = response["currencies"]
-        # currencies_dict = {}
-        # for c in currencies:
-        #     c_url = self.account_info_url+"/"+c+"/balance"
-        #     print(c_url)
-        #     # response = requests.request("GET", c_url, headers=headers).json()
-        #     get_balance_task = asyncio.create_task(self.send_request("GET", c_url, headers))
-        #     response = await get_balance_task
-        #
-        #     currencies_dict.update({c:response["amount"]})
-        #
-        # if currency != None:
-        #     try:
-        #         ret = currencies_dict[currency]
-        #         if verbose: print(currency + ": " + ret)
-        #         return ret
-        #     except:
-        #         if verbose: print("Specified currency not found in wallet.")
-        #         return 0
-
         c_url = self.account_info_url + "/"+currency+"/balance"
         get_balance_task = asyncio.create_task(self.send_request("GET", c_url, headers))
         response = await get_balance_task
@@ -79,7 +56,6 @@ class CloudbetBetManager:
             'X-API-Key': self.api_key
         }
 
-        # response = requests.request("GET", self.bet_history_url, headers=headers, data={}).json()
         get_history_task = asyncio.create_task(self.send_request("GET", self.bet_history_url, headers))
         response = await get_history_task
 
@@ -107,14 +83,7 @@ class CloudbetBetManager:
             'accept': 'application/json'
         }
 
-        # response = requests.request("POST", self.bet_place_url, headers=headers, json=payload)
         post_bet_task = asyncio.create_task(self.send_request("POST", self.bet_place_url, headers, payload))
         response = await post_bet_task
         print("Cloudbet:\n", response)
         return response
-
-
-# cbm = CloudbetBetManager()
-# cbm.check_balance(currency=None, verbose=True)
-# cbm.check_bet_history()
-# cbm.place_bet(13123994, 4.496, 6.5, currency="PLAY_EUR")

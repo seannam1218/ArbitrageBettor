@@ -158,10 +158,3 @@ def record_analysis_data(top_result, platform_names, path):
     with open(path, 'a') as file:
         file.write(top_result_string)
     return
-
-
-# s1 = "santa clara azores"
-# s2 = "vizela"
-# print(fuzz.ratio(s1, s2))
-# print(fuzz.WRatio(s1, s2))
-# print(fuzz.token_set_ratio(s1, s2))

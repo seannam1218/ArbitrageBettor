@@ -34,7 +34,6 @@ class ThunderpickBetManager:
             'Referer': 'https://thunderpick.com/en/content/privacy-and-security?login=true',
             'Origin': 'https://thunderpick.com',
             'Cookie': 'io=seseCTBvX3JzFopmBncR; _ga_3DLGSTSZCV=GS1.1.1661555327.7.1.1661557108.0.0.0; _ga=GA1.1.220779275.1661402824',
-            # 'Connection': 'keep-alive'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -56,7 +55,6 @@ class ThunderpickBetManager:
             'thunderpick-token': self.token
         }
 
-        # response = requests.request("GET", self.exchange_rate_url, headers=headers).json()
         get_exch_rate_task = asyncio.create_task(self.send_request("GET", self.exchange_rate_url, headers=headers))
         response = await get_exch_rate_task
 
@@ -86,7 +84,6 @@ class ThunderpickBetManager:
             'thunderpick-token': self.token
         }
 
-        # response = requests.request("GET", self.pending_bets_url, headers=headers).json()
         get_history_task = asyncio.create_task(self.send_request("GET", self.pending_bets_url, headers=headers))
         response = await get_history_task
 
@@ -128,9 +125,3 @@ class ThunderpickBetManager:
     def withdraw(self, to_address, amount, currency="LTC"):
         print("ALERT:", self.name, "would withdraw now if function was implemented")
         return
-#
-# tpm = ThunderpickBetManager()
-# tpm.login()
-# platform_managers = asyncio.run(tpm.check_balance())
-# tpm.check_bet_history()
-# tpm.place_bet(1901092, 5601495, 1.33, amount_ltc=0.4)

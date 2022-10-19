@@ -40,25 +40,18 @@ class CloudbetDataCollector:
 
         get_response_task = asyncio.create_task(self.get_response())
         response = await get_response_task
-
-        # response = self.get_response()
         if response == -1:
             print("no events found.") if self.verbose else True
             return -1
 
-        # data = self.parse_data(response)
         parse_data_task = asyncio.create_task(self.parse_data(response))
         data = await parse_data_task
 
         cb_df = pd.DataFrame(data, columns=["competition", "event_name", "home", "away", "event1_odds",
                                             "event2_odds", "event_id"])
         cb_df = cb_df.add_suffix('_cloudbet')
-
         cb_df.reset_index(inplace=True)
 
-        # end = time.time()
-        # dur = round(end - start, 2)
-        # print("Finished. Process took {d} seconds.".format(d=dur)) if self.verbose else True
         print("cloudbet:", len(cb_df), "events found.") if self.verbose else True
 
         return cb_df
@@ -98,7 +91,6 @@ class CloudbetDataCollector:
             return self.session.get(url, headers=headers, params=params)
 
         response_data = get_data(self.session, self.url, get_func, params)
-        # print(response_data)
         if response_data["sports"] == []:
             return -1
         return response_data
@@ -151,11 +143,8 @@ class CloudbetDataCollector:
                 if markets == {}:
                     print("attempting to get markets again...") if self.verbose else True
 
-                    # markets = self.get_market_data_again(event_id)
                     get_markets_task = asyncio.create_task(self.get_market_data_again(event_id))
                     markets = await get_markets_task
-
-                # print("\n", markets, "\n")
 
                 try:
                     market_winner = find_key(markets, self.market_keywords[self.sport])
@@ -183,11 +172,6 @@ class CloudbetDataCollector:
                 data.append([competition["name"], event_name, home_team, away_team, home_odds,
                              away_odds, event_id])
 
-                # print("\n==========Cloudbet==========")
-                # print("home:", home_team)
-                # print("away:", away_team)
-                # print(winner_selections)
-
         return data
 
 
@@ -211,5 +195,4 @@ class CloudbetDataCollector:
             return -1
         markets = response["markets"]
 
-        # markets = find_key(response, "markets")
         return markets

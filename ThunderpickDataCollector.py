@@ -46,10 +46,8 @@ class ThunderpickDataCollector:
 
 
     async def get_sports_odds(self, sport):
-        # start = time.time()
         self.sport = sport
 
-        # response = self.get_response()
         get_response_task = asyncio.create_task(self.get_response())
         response = await get_response_task
 
@@ -60,9 +58,7 @@ class ThunderpickDataCollector:
                                             "event2_odds", "market_id", "home_selection_id", "away_selection_id"])
         tp_df = tp_df.add_suffix('_thunderpick')
         tp_df.reset_index(inplace=True)
-        # end = time.time()
-        # dur = round(end - start, 2)
-        # print("Finished. Process took {d} seconds.".format(d=dur)) if self.verbose else True
+
         print("thunderpick:", len(tp_df), "events found.") if self.verbose else True
 
         return tp_df
@@ -128,8 +124,6 @@ class ThunderpickDataCollector:
 
             market = find_key(game, "market")
 
-            # print("\n", market, "\n")
-
             # check status of the bets. 1 = open, 2 = locked, 3 = ???.
             market_bet_status = market["status"]
             home_bet_status = market["home"]["status"]
@@ -151,12 +145,7 @@ class ThunderpickDataCollector:
 
             try:
                 event1_odds = market["home"]["odds"]
-                if market["draw"] != None:
-                    event2_odds = market["draw"]["odds"]
-                    event3_odds = market["away"]["odds"]
-                else:
-                    event2_odds = market["away"]["odds"]
-                    event3_odds = None
+                event2_odds = market["away"]["odds"]
             except:
                 print("WARNING: Market events do not correspond with 1X2 betting. Skipping market.") if self.verbose else True
                 continue

@@ -165,10 +165,10 @@ if __name__ == '__main__':
         managers = [cbm, tpm]
         asyncio.run(prepare_accounts(managers))
         if cbm.ltc_balance < TOTAL_BET_AMOUNT or tpm.ltc_balance < TOTAL_BET_AMOUNT:
-            print("\nNo more money left to safely bet... \nBye bye!")
+            print("\nNo more money left to safely bet... \nQuitting program.")
             break
-        president = MoneyManager(managers, TOTAL_BET_AMOUNT)
+        money_manager = MoneyManager(managers, TOTAL_BET_AMOUNT)
 
         end = time.time()
         print("\npreparing accounts completed in", end - start, "seconds.\n")
-        perform_arb_magic(platforms, president, session, sport, verbose=False)
+        perform_arb_magic(platforms, money_manager, session, sport, verbose=False)

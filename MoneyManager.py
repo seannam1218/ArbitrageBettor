@@ -102,18 +102,7 @@ class MoneyManager:
                 currency="LTC"
             )
         )
-
-        # task2 = asyncio.create_task(
-        #     self.bet_manager_accounts[1].place_bet(
-        #         market_id=top_result["market_id" + self.bet_manager_accounts[1].name].values[0],
-        #         selection_id=top_result["selection_id" + self.bet_manager_accounts[1].name].values[0],
-        #         odds=tp_odds,
-        #         amount_ltc=thunderpick_amount
-        #     )
-        # )
-
         response1 = await task1
-        # status2 = await task2
 
         if response1["status"] == "ACCEPTED": #and status2 == "ok":
             print("Congratz! The bets were placed with no errors.")
@@ -138,21 +127,6 @@ class MoneyManager:
         for a in self.bet_manager_accounts:
             if a.ltc_balance > max:
                 print("ALERT:", "withdraw from", a.name, "of amount", a.ltc_balance-(max+min)/2, "LTC")
-                # a.withdraw(to_address, a.ltc_balance-(max+min)/2, "LTC")
             elif a.ltc_balance < min:
                 print("ALERT:", "deposited to", a.name, "of amount", str((max+min)/2 - a.ltc_balance), 'LTC')
-                # t = w.send_to(a.wallet_address, str((max+min)/2 - a.ltc_balance) + ' LTC', offline=False)
-                # t.info()
 
-
-# cbm = CloudbetBetManager()
-# tpm = ThunderpickBetManager()
-# md = MoneyDistributor([cbm, tpm])
-# asyncio.run(md.place_bets(1))
-# # md.get_total_money(md.bet_manager_accounts)
-# # # md.balance_betting_accounts(0.2, 0.6, "Sanctuary")
-# # #
-# w = md.get_wallet("Estuary")
-# w.info()
-# t = w.send_to("Lg4fihTPNeygU4nYYgDvvqWFyz51Qmj91W", "0.001 LTC", offline=False)
-# t.info()

@@ -57,13 +57,6 @@ class ArbitrageDetector:
         dfs.append(df1)
         dfs.append(df2)
 
-        # for p in self.platforms:
-        #     print("\n>> GETTING DATA FROM", p.name) if self.verbose else True
-        #     single_df = p.get_sports_odds(self.sport)
-        #     if type(single_df) == int:
-        #         return dfs
-        #     dfs.append(single_df)
-
         for df in dfs:
             df["join_code"] = None
 
