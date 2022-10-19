@@ -21,4 +21,4 @@ tp_ltc_address = "[your thunderpick account's LTC address]"
 
 ## Disclaimer:
 
-I will not be updating and maintaining this repository. Since the code is dependant on the APIs of the sports betting websites, if the APIs change (or the return values of API calls change), it will likely break the code.
+I will not be updating and maintaining this repository. Since the code is dependant on the APIs of the sports betting websites, if the APIs change (or if the return values of API calls change), it will likely break the code.
