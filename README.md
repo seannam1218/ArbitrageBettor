@@ -16,9 +16,9 @@ tp_ltc_address = "[your thunderpick account's LTC address]"
 
 ```
 
-cloudbet api key and thunderpick token can be found by inspecting the element of the respective web pages after logging in. The accounts' LTC wallet addresses can be found by going to the deposit menu.
+cloudbet api key and thunderpick token can be found by inspecting the network requests made by your local machine to the respective websites after logging in. The accounts' LTC wallet addresses can be found by going to the deposit menu in both websites.
 
-3. adjust the variables in the main.py file and run the file.
+3. adjust the variables to your liking in the main.py file and run the file.
 
 ## Disclaimer:
 
